@@ -18,4 +18,3 @@ usage: updates state based on form action
 ```
 const [state, formAction, isPending] = useActionState(fn, initialState, permalink?);
 ```
-`
