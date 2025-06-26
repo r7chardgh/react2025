@@ -5,7 +5,7 @@ const UseCallback = () => {
     return (
         <div className='flex flex-col gap-4 items-center sm:items-start'>
             <h3 className=' px-4 py-2 rounded-2xl bg-blue-400'>UseCallback</h3>
-            <p>You may want to see the result by looking at console og browser</p>
+            <p>To see the result, please open browser console</p>
             <Case title='Case 1: test re-render performance with useCallback'>
                 <ParentComponentWithUseCallback />
             </Case>
@@ -25,8 +25,8 @@ const ParentComponentWithUseCallback = () => {
         setCount(0);
     }, []);
     return <>
+        <button className=' capitalize' onClick={() => setCount(count + 1)}>{'[ Parent ]'} count: {count}</button>
         <ChildComponent fn={cachedFn} />
-        <button className='roll-out' onClick={() => setCount(count + 1)}>Parent count: {count}</button>
     </>
 }
 const ParentComponentWithOutUseCallback = () => {
@@ -34,8 +34,8 @@ const ParentComponentWithOutUseCallback = () => {
     console.log('render parent without usecallback');
 
     return <>
+        <button className=' capitalize' onClick={() => setCount(count + 1)}>{'[ Parent ]'} count: {count}</button>
         <ChildComponent fn={() => { setCount(0) }} />
-        <button onClick={() => setCount(count + 1)}>count: {count}</button>
     </>
 }
 
@@ -43,7 +43,7 @@ const ChildComponent = memo(({ fn }: { fn: VoidFunction }) => {
 
     console.log('render child component with memo');
 
-    return <div className='roll-out'><button onClick={fn}>child reset button</button></div>
+    return <div><button className=' capitalize' onClick={fn}>{`[ Child ]`} reset button</button></div>
 })
 
 export default UseCallback
