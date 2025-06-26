@@ -25,4 +25,21 @@ usage: to cache function between re-renders, using with memo, in order to reduce
 
 ```
 const cachedFn = useCallback(fn, dependencies);
+
+const childComponent = memo(({cachedFn})=>{...})
+```
+
+3. useContext
+
+usage: to share context (created with createContext from somewhere else) to any components (all components will be re-render if that context is changed starting from Provider) in order to avoid prop drilling
+
+```
+const ThemeContext = createContext(null); // export it or define it on the same scope with the component that will call useContext
+
+<ThemeContext value='dark'>
+...
+</ThemeContext>
+
+//component inside ThemeContext 
+const theme = useContext(ThemeContext); // theme = 'dark'
 ```

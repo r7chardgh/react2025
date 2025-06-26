@@ -2,6 +2,7 @@ import './App.css'
 import Grid from './components/Grid'
 import UseActionState from './components/UseActionState'
 import UseCallback from './components/UseCallback'
+import UseContext from './components/UseContext'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Grid className='gap-6 w-full'>
         <UseActionState />
         <UseCallback/>
+        <UseContext/>
       </Grid>
     </main>
   )
