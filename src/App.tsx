@@ -1,6 +1,7 @@
 import './App.css'
 import Grid from './components/Grid'
 import UseActionState from './components/UseActionState'
+import UseCallback from './components/UseCallback'
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <h1>React 2025 (v19.1.0)</h1>
       <Grid className='gap-6 w-full'>
         <UseActionState />
+        <UseCallback/>
       </Grid>
     </main>
   )

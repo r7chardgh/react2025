@@ -13,8 +13,16 @@ This is a demo to use all hooks in reactJS
 
 1. useActionState
 
-usage: updates state based on form action
+usage: to update state based on form action
 
 ```
 const [state, formAction, isPending] = useActionState(fn, initialState, permalink?);
+```
+
+2. useCallback
+
+usage: to cache function between re-renders, using with memo, in order to reduce re-rendering times of child component while passing cached function to child
+
+```
+const cachedFn = useCallback(fn, dependencies);
 ```
