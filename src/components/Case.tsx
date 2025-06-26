@@ -1,5 +1,4 @@
 import type { IWrapper } from '../lib/definitions'
-import * as ReactDOMServer from 'react-dom/server';
 interface ICase extends IWrapper {
     title: string;
     code?: string;
