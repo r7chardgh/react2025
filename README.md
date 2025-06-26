@@ -43,3 +43,11 @@ const ThemeContext = createContext(null); // export it or define it on the same 
 //component inside ThemeContext 
 const theme = useContext(ThemeContext); // theme = 'dark'
 ```
+
+4. useDebugValue
+
+usage: to label value to react dev tools
+
+```
+useDebugValue(value)
+```

@@ -3,6 +3,7 @@ import Grid from './components/Grid'
 import UseActionState from './components/UseActionState'
 import UseCallback from './components/UseCallback'
 import UseContext from './components/UseContext'
+import UseDebugValue from './components/UseDebugValue'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <UseActionState />
         <UseCallback/>
         <UseContext/>
+        <UseDebugValue/>
       </Grid>
     </main>
   )
