@@ -1,7 +1,9 @@
-{  
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-       { "source": "/locations/:path(.*)",
-         "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:path(.*)"
-       } 
- ]
+    {
+      "source": "/locations/:path(.*)",
+      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:path(.*)"
+    }
+  ]
 }
