@@ -4,6 +4,10 @@
     {
       "source": "/locations/:match*",
       "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:match*"
+    },
+    {
+      "source": "/locations/:match*/",
+      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:match*/"
     }
   ]
 }
