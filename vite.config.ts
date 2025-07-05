@@ -8,7 +8,7 @@ export default defineConfig({
   server:{
     proxy:{
        '/locations': {
-        target: 'https://geodata.gov.hk/gs/api/v1.0.0/',
+        target: 'https://geodata.gov.hk/gs/api/v1.0.0',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/locations/, ''),
       },
