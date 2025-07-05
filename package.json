@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy":"https://geodata.gov.hk",
+  "proxy": "https://geodata.gov.hk",
   "scripts": {
     "dev": "node server",
     "build": "npm run build:client && npm run build:server",
@@ -35,6 +35,7 @@
     "globals": "^16.0.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-vercel": "^9.0.7"
   }
 }
