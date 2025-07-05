@@ -5,6 +5,7 @@ import UseActionState from './components/UseActionState'
 import UseCallback from './components/UseCallback'
 import UseContext from './components/UseContext'
 import UseDebugValue from './components/UseDebugValue'
+import UseDeferredValue from './components/UseDeferredValue'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <UseCallback />
           <UseContext />
           <UseDebugValue />
+          <UseDeferredValue />
         </Grid>
       </Section>
     </main>
