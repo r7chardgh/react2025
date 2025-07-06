@@ -3,12 +3,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
-      "source": "/locations/:match*",
-      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:match*"
-    },
-    {
-      "source": "/locations/:match*/",
-      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:match*/"
+      "source": "/locations/:path*",
+      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:path*"
     }
-  ]
+  ],
+  "framework": "vite",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist"
 }
