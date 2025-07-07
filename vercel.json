@@ -2,17 +2,24 @@
   "version": 2,
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index.js" },
-    {
-      "source": "/locations/:path*",
-      "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:path*"
-    }
+    { "source": "/(.*)", "destination": "/api/index.js" }
   ],
   "functions": {
     "api/index.js": {
       "includeFiles": "dist/client/**"
     }
   },
+  "headers": [
+    {
+      "source": "locations/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://geodata.gov.hk/gs/api/v1.0.0" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
+    }
+  ],
   "framework": "vite",
   "buildCommand": "vite build",
   "outputDirectory": "dist"
