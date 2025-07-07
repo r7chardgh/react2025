@@ -2,11 +2,17 @@
   "version": 2,
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index.js" },
     {
       "source": "/locations/:path*",
       "destination": "https://geodata.gov.hk/gs/api/v1.0.0/:path*"
     }
   ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/client/**"
+    }
+  },
   "framework": "vite",
   "buildCommand": "vite build",
   "outputDirectory": "dist"
