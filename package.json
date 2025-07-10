@@ -3,22 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://geodata.gov.hk",
   "scripts": {
-    "dev": "node server",
+    "dev": "node server.js",
     "build": "npm run build:client && npm run build:server",
     "build:client": "vite build --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
-    "preview": "cross-env NODE_ENV=production node server"
+    "preview": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10",
+    "@types/express": "^5.0.3",
     "compression": "^1.8.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "motion": "^12.19.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
     "sirv": "^3.0.1",
     "tailwindcss": "^4.1.10"
   },
@@ -36,6 +37,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5",
-    "vite-plugin-vercel": "^9.0.7"
+    "vite-plugin-vercel": "^9.0.7",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
