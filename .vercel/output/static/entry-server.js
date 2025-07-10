@@ -1,6 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
+import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 const Grid = ({ children, className }) => {
   return /* @__PURE__ */ jsx("div", { className: className + " grid grid-cols-1 md:grid-cols-3", children });
 };
@@ -253,7 +254,7 @@ const LocationList = ({ query }) => {
   }) });
 };
 function App() {
-  return /* @__PURE__ */ jsxs("main", { className: "w-full flex flex-col gap-9 mb-9", children: [
+  return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
     /* @__PURE__ */ jsx("p", { children: "last updated: Fri Jun 27 2025 01:15:50 GMT+0800" }),
     /* @__PURE__ */ jsx(Section, { title: "HOOKS", children: /* @__PURE__ */ jsxs(Grid, { className: "gap-6 w-full", children: [
@@ -265,9 +266,34 @@ function App() {
     ] }) })
   ] });
 }
-function render(_url) {
+const AboutPage = () => {
+  return /* @__PURE__ */ jsxs("main", { className: "flex flex-col gap-6", children: [
+    /* @__PURE__ */ jsx("h1", { className: " capitalize", children: "About page" }),
+    /* @__PURE__ */ jsx("a", { target: "_blank", href: "https://github.com/r7chardgh/react2025", children: "GitHub Repo" })
+  ] });
+};
+const NotFound = () => {
+  return /* @__PURE__ */ jsx("main", { children: /* @__PURE__ */ jsx("h1", { className: " font-semibold text-xl uppercase", children: "404 not found" }) });
+};
+const Router = () => {
+  return /* @__PURE__ */ jsxs(Routes, { children: [
+    /* @__PURE__ */ jsx(Route, { path: "/", element: /* @__PURE__ */ jsx(App, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: "/about", element: /* @__PURE__ */ jsx(AboutPage, {}) }),
+    /* @__PURE__ */ jsx(Route, { path: "*", element: /* @__PURE__ */ jsx(NotFound, {}) })
+  ] });
+};
+const Nav = () => {
+  return /* @__PURE__ */ jsxs("nav", { className: " absolute top-0 left-0 flex gap-4 m-auto w-full justify-center z-30 my-4", children: [
+    /* @__PURE__ */ jsx(Link, { className: "border py-2 px-4 capitalize font-semibold", to: "/", children: "home" }),
+    /* @__PURE__ */ jsx(Link, { className: "border py-2 px-4 capitalize font-semibold", to: "/about", children: "about" })
+  ] });
+};
+function render(url) {
   const html = renderToString(
-    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsx(App, {}) })
+    /* @__PURE__ */ jsx(StrictMode, { children: /* @__PURE__ */ jsxs(StaticRouter, { location: url, children: [
+      /* @__PURE__ */ jsx(Nav, {}),
+      /* @__PURE__ */ jsx(Router, {})
+    ] }) })
   );
   return { html };
 }
