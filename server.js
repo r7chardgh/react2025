@@ -66,6 +66,16 @@ app.use("*all", async (req, res) => {
   }
 });
 
+const {createProxyMiddleware} = (await import("http-proxy-middleware")).default;
+app.use(
+  '/locations',
+  createProxyMiddleware({
+    target: 'https://geodata.gov.hk/gs/api/v1.0.0',
+    changeOrigin: true,
+    pathRewrite: { '^/locations': '' },
+  })
+);
+
 // Start http server
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
