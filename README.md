@@ -26,7 +26,7 @@ usage: to cache function between re-renders, using with memo, in order to reduce
 ```
 const cachedFn = useCallback(fn, dependencies);
 
-const childComponent = memo(({cachedFn})=>{...})
+const childComponent = memo(({cachedFn})=>{...});
 ```
 
 3. useContext
@@ -49,5 +49,13 @@ const theme = useContext(ThemeContext); // theme = 'dark'
 usage: to label value to react dev tools
 
 ```
-useDebugValue(value)
+useDebugValue(value);
+```
+
+5. useDeferredValue
+
+usage: to defer updating part of the UI, used with Suspense component. when ui is updated with value change, user will not see the fallback but previous value until data is loaded. (promise is done)
+
+```
+useDeferredValue(value);
 ```
