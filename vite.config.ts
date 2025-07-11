@@ -21,3 +21,5 @@ export default defineConfig({
   },
   plugins: [react(), tailwindcss(), tsconfigPaths(),vercel()],
 })
+
+//you cannot simply setup proxy here for production, only works on dev server
