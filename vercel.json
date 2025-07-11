@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index.js" }
@@ -19,8 +18,5 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" }
       ]
     }
-  ],
-  "framework": "vite",
-  "buildCommand": "vite build",
-  "outputDirectory": "dist"
+  ]
 }

@@ -1,18 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-
+import tsconfigPaths from 'vite-tsconfig-paths'
+import vercel from 'vite-plugin-vercel';
 
 // https://vite.dev/config/
 export default defineConfig({
-  server:{
-    proxy:{
-       '/locations': {
-        target: 'https://geodata.gov.hk/gs/api/v1.0.0',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/locations/, ''),
-      },
-    }
+  build: {
+    outDir: 'dist/client',
   },
-  plugins: [react(), tailwindcss()],
+  server: {
+    cors:{origin:'https://geodata.gov.hk/gs/api/v1.0.0'},
+    // proxy: {
+    //   '/locations': {
+    //     target: 'https://geodata.gov.hk/gs/api/v1.0.0',
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/locations/, ''),
+    //   },
+    // }
+  },
+  plugins: [react(), tailwindcss(), tsconfigPaths(),vercel()],
 })
+
+//you cannot simply setup proxy here for production, only works on dev server
