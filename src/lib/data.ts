@@ -12,7 +12,7 @@ export async function getLocations(query: string) {
     await new Promise(resolve => {
       setTimeout(resolve, 1000);
     });
-    const response = await fetch(`/locations/locationSearch?q=${query}`); // Your API endpoint
+    const response = await fetch(`https://geodata.gov.hk/gs/api/v1.0.0/locationSearch?q=${query}`); // Your API endpoint
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

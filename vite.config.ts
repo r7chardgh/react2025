@@ -10,13 +10,14 @@ export default defineConfig({
     outDir: 'dist/client',
   },
   server: {
-    proxy: {
-      '/locations': {
-        target: 'https://geodata.gov.hk/gs/api/v1.0.0',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/locations/, ''),
-      },
-    }
+    cors:{origin:'https://geodata.gov.hk/gs/api/v1.0.0'},
+    // proxy: {
+    //   '/locations': {
+    //     target: 'https://geodata.gov.hk/gs/api/v1.0.0',
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/locations/, ''),
+    //   },
+    // }
   },
   plugins: [react(), tailwindcss(), tsconfigPaths(),vercel()],
 })
