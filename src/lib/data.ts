@@ -1,5 +1,3 @@
-//import type { ILocation } from "./definitions";
-
 let locationsCache = new Map();
 export function fetchLocations(query: string) {
   if (!locationsCache.has(query)) {

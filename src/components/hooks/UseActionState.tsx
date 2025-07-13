@@ -1,6 +1,7 @@
 import { useActionState } from 'react'
-import Case from './Case';
-
+import Case from '../Case';
+import Tag from '../Tag';
+import { FaCartPlus, FaPlus } from "react-icons/fa";
 const UseActionState = () => {
     const [state, formActionOne] = useActionState(increment, 0);
 
@@ -10,11 +11,13 @@ const UseActionState = () => {
 
     return (
         <div className='flex flex-col gap-4 items-center sm:items-start'>
-            <h3 className=' px-4 py-2 rounded-2xl bg-blue-400'>UseActionState</h3>
+            <Tag title='UseActionState' />
             <Case title="Case 1: form button increase state by 1">
-                <form className='flex flex-col gap-2'>
+                <form className='flex flex-col gap-2 items-start'>
+                    <p className=' text-gray-600 text-sm'>button</p>
+                    <button formAction={formActionOne} className='flex gap-2 items-center justify-center'><FaPlus />Increment</button>
+                    <p className=' text-gray-600 text-sm'>result</p>
                     state: {state}
-                    <button formAction={formActionOne}>Increment</button>
                 </form>
             </Case>
             <Case title="Case 2: add to cart with pending">
@@ -42,9 +45,11 @@ const AddToCartForm = ({ itemID }: { itemID?: string }) => {
         return 'no item id'
     }
 
-    return <form action={AddToCartFormAction} itemID='1' className='flex flex-col gap-2'>
+    return <form action={AddToCartFormAction} itemID='1' className='flex flex-col gap-2 items-start'>
         <input type='hidden' name='itemID' value={itemID} />
-        <button type="submit">Add to Cart</button>
+        <p className=' text-gray-600 text-sm'>button</p>
+        <button type="submit" className='flex gap-2 items-center justify-center'><FaCartPlus />  Add to Cart</button>
+        <p className=' text-gray-600 text-sm'>result</p>
         {isPending ? "Loading..." : message}
     </form>
 }

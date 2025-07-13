@@ -1,3 +1,8 @@
+@import "tailwindcss";
+@theme {
+  --color-react: #58c4dc;
+  --color-primary_text: #23272f;
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -15,11 +20,11 @@
 
 a {
   font-weight: 500;
-  color: #64b4ff;
+  color: #58c4dc;
   text-decoration: inherit;
 }
 a:hover {
-  color: #53aaf2;
+  color: #469caf;
 }
 
 body {
@@ -42,12 +47,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-gray-600);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #64aaff;
+  background-color: var(--color-gray-600);
+  border-color: white;
 }
 button:focus,
 button:focus-visible {
