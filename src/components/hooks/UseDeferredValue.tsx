@@ -3,7 +3,7 @@ import Case from "../Case"
 import { fetchLocations } from "../../lib/data";
 import { debounce } from "../../lib/debounce";
 import Tag from "../Tag";
-
+import { BiCool } from "react-icons/bi";
 const UseDeferredValue = () => {
     const [query, setQuery] = useState('');
     const [queryTwo, setQueryTwo] = useState('');
@@ -32,10 +32,12 @@ const UseDeferredValue = () => {
                         <label htmlFor="data">location search</label>
                         <input id="data" placeholder="enter hk street name" className="border p-2 rounded-xl " value={query} type="text" onChange={(e) => { handleSearch(e.target.value); setQuery(e.target.value) }} />
                     </div>
-                    <p className="text-sm text-gray-600">result</p>
-                    <div>search query: {deferredQuery}</div>
+                    <p className="text-sm text-gray-600 flex gap-2 items-center">result {debouncedQuery !== deferredQuery && <BiCool />}</p>
+                    <div style={{
+                        opacity: debouncedQuery !== deferredQuery ? 0.5 : 1,
+                    }}>search query: {deferredQuery}</div>
                     <Suspense fallback={<h3>searching...</h3>}>
-                        <LocationList query={deferredQuery} />
+                        <LocationList query={deferredQuery} indicate={debouncedQuery !== deferredQuery} />
                     </Suspense>
                 </div>
             </Case>
@@ -60,7 +62,7 @@ const UseDeferredValue = () => {
     )
 }
 
-const LocationList = ({ query }: { query: string }) => {
+const LocationList = ({ query, indicate }: { query: string, indicate?: boolean }) => {
     if (query === '') {
         return null;
     }
@@ -70,11 +72,12 @@ const LocationList = ({ query }: { query: string }) => {
         return <p>No matches for <i>"{query}"</i></p>;
     }
 
-    return <div className="text-left">{locations?.map((location: any, index: any) => {
-        return <div key={index}>
-            <p>{index + 1}: {location.nameEN}</p>
-        </div>
-    })}</div>
+    return <div className={`text-left ${indicate ? ' opacity-50' : 'opacity-100'}`}>
+        {locations?.map((location: any, index: any) => {
+            return <div key={index}>
+                <p>{index + 1}: {location.nameEN}</p>
+            </div>
+        })}</div>
 
 }
 

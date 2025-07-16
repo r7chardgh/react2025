@@ -6,6 +6,7 @@ import { TbFishHook } from "react-icons/tb";
 import { FaPlus, FaCartPlus, FaHome, FaCoffee } from "react-icons/fa";
 import { RiResetLeftFill } from "react-icons/ri";
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { BiCool } from "react-icons/bi";
 const Grid = ({ children, className }) => {
   return /* @__PURE__ */ jsx("div", { className: className + " grid grid-cols-1 md:grid-cols-3", children });
 };
@@ -261,12 +262,17 @@ const UseDeferredValue = () => {
           setQuery(e.target.value);
         } })
       ] }),
-      /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "result" }),
-      /* @__PURE__ */ jsxs("div", { children: [
+      /* @__PURE__ */ jsxs("p", { className: "text-sm text-gray-600 flex gap-2 items-center", children: [
+        "result ",
+        debouncedQuery !== deferredQuery && /* @__PURE__ */ jsx(BiCool, {})
+      ] }),
+      /* @__PURE__ */ jsxs("div", { style: {
+        opacity: debouncedQuery !== deferredQuery ? 0.5 : 1
+      }, children: [
         "search query: ",
         deferredQuery
       ] }),
-      /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("h3", { children: "searching..." }), children: /* @__PURE__ */ jsx(LocationList, { query: deferredQuery }) })
+      /* @__PURE__ */ jsx(Suspense, { fallback: /* @__PURE__ */ jsx("h3", { children: "searching..." }), children: /* @__PURE__ */ jsx(LocationList, { query: deferredQuery, indicate: debouncedQuery !== deferredQuery }) })
     ] }) }),
     /* @__PURE__ */ jsx(Case, { title: "Case 2: search WITHOUT useDeferredValue (debounce)", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-4", children: [
       /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2 items-start", children: [
@@ -288,7 +294,7 @@ const UseDeferredValue = () => {
     ] }) })
   ] });
 };
-const LocationList = ({ query }) => {
+const LocationList = ({ query, indicate }) => {
   if (query === "") {
     return null;
   }
@@ -303,7 +309,7 @@ const LocationList = ({ query }) => {
       ] })
     ] });
   }
-  return /* @__PURE__ */ jsx("div", { className: "text-left", children: locations == null ? void 0 : locations.map((location, index) => {
+  return /* @__PURE__ */ jsx("div", { className: `text-left ${indicate ? " opacity-50" : "opacity-100"}`, children: locations == null ? void 0 : locations.map((location, index) => {
     return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("p", { children: [
       index + 1,
       ": ",
