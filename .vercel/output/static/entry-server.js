@@ -277,8 +277,8 @@ const UseDeferredValue = () => {
     /* @__PURE__ */ jsx(Case, { title: "Case 2: search WITHOUT useDeferredValue (debounce)", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-4", children: [
       /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2 items-start", children: [
         /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "input" }),
-        /* @__PURE__ */ jsx("label", { htmlFor: "data", children: "location search" }),
-        /* @__PURE__ */ jsx("input", { id: "data", placeholder: "enter hk street name", className: "border p-2 rounded-xl ", value: queryTwo, type: "text", onChange: (e) => {
+        /* @__PURE__ */ jsx("label", { htmlFor: "dataTwo", children: "location search" }),
+        /* @__PURE__ */ jsx("input", { id: "dataTwo", placeholder: "enter hk street name", className: "border p-2 rounded-xl ", value: queryTwo, type: "text", onChange: (e) => {
           handleSearchTwo(e.target.value);
           setQueryTwo(e.target.value);
         } })

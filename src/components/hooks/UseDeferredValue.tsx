@@ -45,8 +45,8 @@ const UseDeferredValue = () => {
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex flex-col gap-2 items-start">
                         <p className="text-sm text-gray-600">input</p>
-                        <label htmlFor="data">location search</label>
-                        <input id="data" placeholder="enter hk street name" className="border p-2 rounded-xl " value={queryTwo} type="text" onChange={(e) => { handleSearchTwo(e.target.value); setQueryTwo(e.target.value) }} />
+                        <label htmlFor="dataTwo">location search</label>
+                        <input id="dataTwo" placeholder="enter hk street name" className="border p-2 rounded-xl " value={queryTwo} type="text" onChange={(e) => { handleSearchTwo(e.target.value); setQueryTwo(e.target.value) }} />
                     </div>
                     <div className="flex flex-col gap-2 items-start">
 
