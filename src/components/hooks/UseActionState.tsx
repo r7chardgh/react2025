@@ -29,22 +29,23 @@ const UseActionState = () => {
 
 //second case
 const AddToCartForm = ({ itemID }: { itemID?: string }) => {
-    const [message, AddToCartFormAction, isPending] = useActionState(addToCart, 'default message');
+    const [message, AddToCartFormAction, isPending] = useActionState(addToCart, 'default message'); //main dish
 
     async function addToCart(prevState: string, queryData: any) {
-        const itemID = queryData.get('itemID');
+        const itemID = queryData.get('itemID'); //practical way to add the correct item to cart
 
         if (itemID === '1') {
             console.log('the prevState is: ', prevState);
 
             await new Promise(resolve => {
                 setTimeout(resolve, 2000);
-            });
+            }); //delay 2 seconds
             return "Added to cart";
         }
         return 'no item id'
     }
 
+    //hidden input with item id
     return <form action={AddToCartFormAction} itemID='1' className='flex flex-col gap-2 items-start'>
         <input type='hidden' name='itemID' value={itemID} />
         <p className=' text-gray-600 text-sm'>button</p>
