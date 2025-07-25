@@ -3,12 +3,12 @@ import Case from '../Case';
 import Tag from '../Tag';
 import { RiResetLeftFill } from "react-icons/ri";
 import { FaPlus } from 'react-icons/fa';
-import { IoMdInformationCircleOutline } from 'react-icons/io';
+import Reminder from '../Reminder';
 const UseCallback = () => {
     return (
         <div className='flex flex-col gap-4 items-center sm:items-start'>
             <Tag title='UseCallback' />
-            <p className=' bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start sm:items-center gap-1 text-left'><IoMdInformationCircleOutline className='mt-1 sm:mt-0' size={18}/>To see the result, please open browser console</p>
+            <Reminder title="To see the result, please open browser console" />
             <Case title='Case 1: test re-render performance with useCallback'>
                 <ParentComponentWithUseCallback />
             </Case>
@@ -30,7 +30,7 @@ const ParentComponentWithUseCallback = () => {
     return <div className='flex flex-col gap-2'>
         <div className='flex flex-col gap-2 items-start'>
             <p className='text-gray-600 text-sm'>parent button</p>
-            <button className='flex gap-2 justify-center items-center capitalize' onClick={() => setCount(count + 1)}><FaPlus/>count: {count}</button>
+            <button className='flex gap-2 justify-center items-center capitalize' onClick={() => setCount(count + 1)}><FaPlus />count: {count}</button>
         </div>
         <ChildComponent fn={cachedFn} />
     </div>
@@ -42,7 +42,7 @@ const ParentComponentWithOutUseCallback = () => {
     return <div className='flex flex-col gap-2'>
         <div className='flex flex-col gap-2 items-start'>
             <p className='text-gray-600 text-sm'>parent button</p>
-            <button className='flex gap-2 justify-center items-center capitalize' onClick={() => setCount(count + 1)}><FaPlus/>count: {count}</button>
+            <button className='flex gap-2 justify-center items-center capitalize' onClick={() => setCount(count + 1)}><FaPlus />count: {count}</button>
         </div>
         <ChildComponent fn={() => { setCount(0) }} />
     </div>
