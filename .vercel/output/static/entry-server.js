@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, StrictMode } from "react";
+import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 import { TbFishHook } from "react-icons/tb";
@@ -181,15 +181,18 @@ const LoginButton = () => {
     !!login ? login() : null;
   }, children: "login" });
 };
+const Reminder = ({ title }) => {
+  return /* @__PURE__ */ jsxs("p", { className: " bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start gap-1 text-left", children: [
+    /* @__PURE__ */ jsx(IoMdInformationCircleOutline, { className: "mt-1" }),
+    title
+  ] });
+};
 const UseDebugValue = () => {
   const [count, setCount] = useState(0);
   useDebugValue(count);
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
     /* @__PURE__ */ jsx(Tag, { title: "UseDebugValue" }),
-    /* @__PURE__ */ jsxs("p", { className: " bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start gap-1 text-left", children: [
-      /* @__PURE__ */ jsx(IoMdInformationCircleOutline, { className: "mt-1" }),
-      "To see the result, check in React Dev Tool"
-    ] }),
+    /* @__PURE__ */ jsx(Reminder, { title: "To see the result, check in React Dev Tool" }),
     /* @__PURE__ */ jsx(Case, { title: "Case 1: label count value to react dev tool", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
       /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "button" }),
       /* @__PURE__ */ jsxs("button", { onClick: () => setCount(count + 1), children: [
@@ -317,6 +320,58 @@ const LocationList = ({ query, indicate }) => {
     ] }) }, index);
   }) });
 };
+const UseEffect = () => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [iconNumber, setIconNumber] = useState(0);
+  const displayIcon = (index) => {
+    switch (index) {
+      case 1:
+        return "😉";
+      case 2:
+        return "🦖";
+      case 3:
+        return "🍜";
+      case 4:
+        return "🚀";
+      default:
+        return "";
+    }
+  };
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+  useEffect(() => {
+    document.title = "React 2025 v19.1.0 " + displayIcon(iconNumber);
+  }, [iconNumber]);
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start p-2 hover:shadow-2xl hover:bg-gray-600 transition-all", children: [
+    /* @__PURE__ */ jsx(Tag, { title: "UseEffect" }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: subscription - add event listener to detect device is online or not", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx(Reminder, { title: "switch on/off your device to see the result" }),
+      /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start", children: [
+        /* @__PURE__ */ jsx("h2", { children: "Network Status:" }),
+        isOnline ? /* @__PURE__ */ jsx("p", { style: { color: "green" }, children: "Online" }) : /* @__PURE__ */ jsx("p", { style: { color: "red" }, children: "Offline" })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 2: side effect - update web title", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "button" }),
+      /* @__PURE__ */ jsx("button", { onClick: () => {
+        if (iconNumber > 3) {
+          setIconNumber(0);
+        } else {
+          setIconNumber(iconNumber + 1);
+        }
+      }, children: "switch title icon" }),
+      iconNumber != 0 && /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "just look at the browser tab" })
+    ] }) })
+  ] });
+};
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
@@ -326,7 +381,8 @@ function App() {
       /* @__PURE__ */ jsx(UseCallback, {}),
       /* @__PURE__ */ jsx(UseContext, {}),
       /* @__PURE__ */ jsx(UseDebugValue, {}),
-      /* @__PURE__ */ jsx(UseDeferredValue, {})
+      /* @__PURE__ */ jsx(UseDeferredValue, {}),
+      /* @__PURE__ */ jsx(UseEffect, {})
     ] }) })
   ] });
 }
