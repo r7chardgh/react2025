@@ -350,7 +350,7 @@ const UseEffect = () => {
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start p-2 hover:shadow-2xl hover:bg-gray-600 transition-all", children: [
     /* @__PURE__ */ jsx(Tag, { title: "UseEffect" }),
     /* @__PURE__ */ jsx(Case, { title: "Case 1: subscription - add event listener to detect device is online or not", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
-      /* @__PURE__ */ jsx(Reminder, { title: "switch on/off your device to see the result" }),
+      /* @__PURE__ */ jsx(Reminder, { title: "switch on/off your device network to see the result" }),
       /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start", children: [
         /* @__PURE__ */ jsx("h2", { children: "Network Status:" }),
         isOnline ? /* @__PURE__ */ jsx("p", { style: { color: "green" }, children: "Online" }) : /* @__PURE__ */ jsx("p", { style: { color: "red" }, children: "Offline" })
@@ -372,7 +372,7 @@ const UseEffect = () => {
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
-    /* @__PURE__ */ jsx("p", { children: "last updated: Fri Jun 27 2025 01:15:50 GMT+0800" }),
+    /* @__PURE__ */ jsx("p", { children: "last updated: Fri JUL 26 2025 00:58:50 GMT+0800" }),
     /* @__PURE__ */ jsx(Section, { title: "HOOKS", children: /* @__PURE__ */ jsxs(Grid, { className: "gap-18 sm:gap-6 w-full", children: [
       /* @__PURE__ */ jsx(UseActionState, {}),
       /* @__PURE__ */ jsx(UseCallback, {}),

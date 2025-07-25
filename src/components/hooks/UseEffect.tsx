@@ -46,7 +46,7 @@ const UseEffect = () => {
             <Tag title='UseEffect' />
             <Case title="Case 1: subscription - add event listener to detect device is online or not">
                 <div className="flex flex-col items-start gap-2">
-                    <Reminder title="switch on/off your device to see the result" />
+                    <Reminder title="switch on/off your device network to see the result" />
                     <div className="flex flex-col items-start">
                         <h2>Network Status:</h2>
                         {isOnline ? (
