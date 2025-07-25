@@ -18,7 +18,7 @@ const UseEffect = () => {
                 return '🚀';
 
             default:
-                return '';
+                return '2025 v19.1.0';
         }
     }
     useEffect(() => {
@@ -38,7 +38,7 @@ const UseEffect = () => {
 
     useEffect(() => {
         //side effect  
-        document.title = 'React 2025 v19.1.0 ' + displayIcon(iconNumber);
+        document.title = 'React ' + displayIcon(iconNumber);
     }, [iconNumber])
 
     return (

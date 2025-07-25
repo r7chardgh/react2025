@@ -74,13 +74,16 @@ const AddToCartForm = ({ itemID }) => {
     isPending ? "Loading..." : message
   ] });
 };
+const Reminder = ({ title }) => {
+  return /* @__PURE__ */ jsxs("p", { className: " bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start gap-1 text-left", children: [
+    /* @__PURE__ */ jsx(IoMdInformationCircleOutline, { className: "mt-1" }),
+    title
+  ] });
+};
 const UseCallback = () => {
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
     /* @__PURE__ */ jsx(Tag, { title: "UseCallback" }),
-    /* @__PURE__ */ jsxs("p", { className: " bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start sm:items-center gap-1 text-left", children: [
-      /* @__PURE__ */ jsx(IoMdInformationCircleOutline, { className: "mt-1 sm:mt-0", size: 18 }),
-      "To see the result, please open browser console"
-    ] }),
+    /* @__PURE__ */ jsx(Reminder, { title: "To see the result, please open browser console" }),
     /* @__PURE__ */ jsx(Case, { title: "Case 1: test re-render performance with useCallback", children: /* @__PURE__ */ jsx(ParentComponentWithUseCallback, {}) }),
     /* @__PURE__ */ jsx(Case, { title: "Case 2: test re-render performance WITHOUT useCallback", children: /* @__PURE__ */ jsx(ParentComponentWithOutUseCallback, {}) })
   ] });
@@ -180,12 +183,6 @@ const LoginButton = () => {
     e.preventDefault();
     !!login ? login() : null;
   }, children: "login" });
-};
-const Reminder = ({ title }) => {
-  return /* @__PURE__ */ jsxs("p", { className: " bg-gray-600 px-2 py-1 rounded-sm flex justify-center items-start gap-1 text-left", children: [
-    /* @__PURE__ */ jsx(IoMdInformationCircleOutline, { className: "mt-1" }),
-    title
-  ] });
 };
 const UseDebugValue = () => {
   const [count, setCount] = useState(0);
@@ -334,7 +331,7 @@ const UseEffect = () => {
       case 4:
         return "🚀";
       default:
-        return "";
+        return "2025 v19.1.0";
     }
   };
   useEffect(() => {
@@ -348,7 +345,7 @@ const UseEffect = () => {
     };
   }, []);
   useEffect(() => {
-    document.title = "React 2025 v19.1.0 " + displayIcon(iconNumber);
+    document.title = "React " + displayIcon(iconNumber);
   }, [iconNumber]);
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start p-2 hover:shadow-2xl hover:bg-gray-600 transition-all", children: [
     /* @__PURE__ */ jsx(Tag, { title: "UseEffect" }),
