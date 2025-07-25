@@ -30,6 +30,7 @@ const UseEffect = () => {
         window.addEventListener('offline', handleOffline);
 
         return () => {
+            //unsubscription before every re-render with changed dependencies
             window.removeEventListener('online', handleOnline);
             window.removeEventListener('offline', handleOffline);
         };

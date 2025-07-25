@@ -59,3 +59,16 @@ usage: to defer updating part of the UI, used with Suspense component. when ui i
 ```
 useDeferredValue(value);
 ```
+
+6. useEffect
+
+usage: to handle side effect , subscription, fetching data within react component
+
+```
+useEffect(()=>{
+    //side effect, fetching data, subscription here
+    return ()=>{
+        //do something before every re-render with changed dependencies
+    }
+},[dependencies]);
+```
