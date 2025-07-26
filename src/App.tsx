@@ -9,6 +9,7 @@ import UseDebugValue from './components/hooks/UseDebugValue'
 import UseDeferredValue from './components/hooks/UseDeferredValue'
 import UseEffect from './components/hooks/UseEffect'
 import UseId from './components/hooks/UseId'
+import UseImperativeHandle from './components/hooks/UseImperativeHandle'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <UseDeferredValue />
           <UseEffect />
           <UseId/>
+          <UseImperativeHandle/>
         </Grid>
       </Section>
     </main>

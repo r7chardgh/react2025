@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, StrictMode } from "react";
+import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, useRef, useImperativeHandle, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 import { TbFishHook } from "react-icons/tb";
@@ -103,7 +103,7 @@ const ParentComponentWithUseCallback = () => {
         count
       ] })
     ] }),
-    /* @__PURE__ */ jsx(ChildComponent, { fn: cachedFn })
+    /* @__PURE__ */ jsx(ChildComponent$1, { fn: cachedFn })
   ] });
 };
 const ParentComponentWithOutUseCallback = () => {
@@ -118,12 +118,12 @@ const ParentComponentWithOutUseCallback = () => {
         count
       ] })
     ] }),
-    /* @__PURE__ */ jsx(ChildComponent, { fn: () => {
+    /* @__PURE__ */ jsx(ChildComponent$1, { fn: () => {
       setCount(0);
     } })
   ] });
 };
-const ChildComponent = memo(({ fn }) => {
+const ChildComponent$1 = memo(({ fn }) => {
   console.log("render child component with memo");
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-2 items-start", children: [
     /* @__PURE__ */ jsx("p", { className: "text-gray-600 text-sm", children: "child button" }),
@@ -391,6 +391,68 @@ const UseId = () => {
     ] }) })
   ] });
 };
+const UseImperativeHandle = () => {
+  const myRef = useRef(null);
+  const myRefTwo = useRef(null);
+  const handleClick = () => {
+    myRef.current.customFocus();
+    myRefTwo.current.scrollToBottom();
+  };
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
+    /* @__PURE__ */ jsx(Tag, { title: "UseImperativeHandle" }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: title", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "button" }),
+      /* @__PURE__ */ jsx("button", { onClick: handleClick, children: "scroll down the list & focus on input" }),
+      /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "childs" }),
+      /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+        /* @__PURE__ */ jsx(ChildList, { ref: myRefTwo }),
+        /* @__PURE__ */ jsx(ChildComponent, { ref: myRef })
+      ] })
+    ] }) })
+  ] });
+};
+const ChildList = ({ ref }) => {
+  const listRef = useRef(null);
+  const data = [
+    "🤠",
+    "👀",
+    "🧑‍💻",
+    "⛹🏽",
+    "🐈",
+    "🐳"
+  ];
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        scrollToBottom() {
+          const node = listRef.current;
+          node.scrollTop = node.scrollHeight;
+        }
+      };
+    },
+    []
+  );
+  return /* @__PURE__ */ jsx("ul", { ref: listRef, className: " bg-white w-full h-24 overflow-scroll", children: data.map((d, i) => /* @__PURE__ */ jsx("li", { children: d }, i)) });
+};
+const ChildComponent = ({ ref }) => {
+  const inputRef = useRef(null);
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        customFocus() {
+          inputRef.current.focus();
+        }
+      };
+    },
+    []
+  );
+  return /* @__PURE__ */ jsxs("div", { className: "w-full flex flex-col gap-1 items-start", children: [
+    /* @__PURE__ */ jsx("label", { htmlFor: "firstname", children: "firstname:" }),
+    /* @__PURE__ */ jsx("input", { name: "firstname", id: "firstname", placeholder: "enter first name", className: "w-full p-1 rounded-sm border ", ref: inputRef })
+  ] });
+};
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
@@ -402,7 +464,8 @@ function App() {
       /* @__PURE__ */ jsx(UseDebugValue, {}),
       /* @__PURE__ */ jsx(UseDeferredValue, {}),
       /* @__PURE__ */ jsx(UseEffect, {}),
-      /* @__PURE__ */ jsx(UseId, {})
+      /* @__PURE__ */ jsx(UseId, {}),
+      /* @__PURE__ */ jsx(UseImperativeHandle, {})
     ] }) })
   ] });
 }

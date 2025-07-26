@@ -40,7 +40,7 @@ const ThemeContext = createContext(null); // export it or define it on the same 
 ...
 </ThemeContext>
 
-//component inside ThemeContext 
+//component inside ThemeContext
 const theme = useContext(ThemeContext); // theme = 'dark'
 ```
 
@@ -79,4 +79,26 @@ usage: to generate unique id for accessibility attribute
 
 ```
 const id = useId();
+```
+
+8. useImperativeHandle
+
+usage: to customize the exposed handle (parent ref won't receive the entired DOM node)
+
+```
+function ChildComponent({ref}){
+    const inputRef = useRef(null);
+
+    useImperativeHandle(ref, () => {
+        return {
+        // ... your methods ...
+        // then parent can call the method e.g. ref.current.focus()
+        focus(){
+            inputRef.current.focus();
+        }
+        };
+    }, []);
+
+    return <input ref={inputRef} />
+}
 ```
