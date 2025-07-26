@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, useRef, useImperativeHandle, StrictMode } from "react";
+import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, useRef, useImperativeHandle, useInsertionEffect, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 import { TbFishHook } from "react-icons/tb";
@@ -455,6 +455,30 @@ const ChildComponent = ({ ref }) => {
     /* @__PURE__ */ jsx("input", { name: "firstname", id: "firstname", placeholder: "enter first name", className: "w-full p-1 rounded-sm border ", ref: inputRef })
   ] });
 };
+const UseInsertionEffect = () => {
+  useInsertionEffect(() => {
+    const styleTag = document.createElement("style");
+    styleTag.innerHTML = `
+        .my-component {
+            color: white;
+            background:#58c4dc;
+            font-size: 20px;
+            padding:4px;
+            }
+            `;
+    document.head.appendChild(styleTag);
+    return () => {
+      document.head.removeChild(styleTag);
+    };
+  });
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
+    /* @__PURE__ */ jsx(Tag, { title: "UseInsertionEffect" }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: insert style to component", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx("p", { className: " text-sm text-gray-600", children: "result" }),
+      /* @__PURE__ */ jsx("div", { className: "my-component", children: "Hello, styled component!" })
+    ] }) })
+  ] });
+};
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
@@ -467,7 +491,8 @@ function App() {
       /* @__PURE__ */ jsx(UseDeferredValue, {}),
       /* @__PURE__ */ jsx(UseEffect, {}),
       /* @__PURE__ */ jsx(UseId, {}),
-      /* @__PURE__ */ jsx(UseImperativeHandle, {})
+      /* @__PURE__ */ jsx(UseImperativeHandle, {}),
+      /* @__PURE__ */ jsx(UseInsertionEffect, {})
     ] }) })
   ] });
 }

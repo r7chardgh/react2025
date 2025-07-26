@@ -102,3 +102,22 @@ function ChildComponent({ref}){
     return <input ref={inputRef} />
 }
 ```
+
+9. useInsertionEffect
+
+usage: to insert elements into DOM before any layout effect (for CSS-in-JS library user only)
+
+```
+useInsertionEffect(() => {
+        const styleTag = document.createElement('style');
+        styleTag.innerHTML = `
+        .my-component {
+            //css style
+            }
+            `;
+        document.head.appendChild(styleTag);
+        return () => {
+            document.head.removeChild(styleTag);
+        };
+    });
+```
