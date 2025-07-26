@@ -72,3 +72,11 @@ useEffect(()=>{
     }
 },[dependencies]);
 ```
+
+7. useId
+
+usage: to generate unique id for accessibility attribute
+
+```
+const id = useId();
+```
