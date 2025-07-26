@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, StrictMode } from "react";
+import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 import { TbFishHook } from "react-icons/tb";
@@ -369,6 +369,28 @@ const UseEffect = () => {
     ] }) })
   ] });
 };
+const UseId = () => {
+  const id = useId();
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start p-2 hover:shadow-2xl hover:bg-gray-600 transition-all", children: [
+    /* @__PURE__ */ jsx(Tag, { title: "UseId" }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: add id to accessibility attribute", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "input" }),
+      /* @__PURE__ */ jsxs("label", { className: "flex flex-col items-start gap-2", children: [
+        "Password:",
+        /* @__PURE__ */ jsx(
+          "input",
+          {
+            className: "border rounded-sm p-1",
+            placeholder: "enter the password",
+            type: "password",
+            "aria-describedby": id
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsx("p", { id, className: "text-sm text-left", children: "The password should contain at least 18 characters" })
+    ] }) })
+  ] });
+};
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
@@ -379,7 +401,8 @@ function App() {
       /* @__PURE__ */ jsx(UseContext, {}),
       /* @__PURE__ */ jsx(UseDebugValue, {}),
       /* @__PURE__ */ jsx(UseDeferredValue, {}),
-      /* @__PURE__ */ jsx(UseEffect, {})
+      /* @__PURE__ */ jsx(UseEffect, {}),
+      /* @__PURE__ */ jsx(UseId, {})
     ] }) })
   ] });
 }

@@ -8,6 +8,7 @@ import UseContext from './components/hooks/UseContext'
 import UseDebugValue from './components/hooks/UseDebugValue'
 import UseDeferredValue from './components/hooks/UseDeferredValue'
 import UseEffect from './components/hooks/UseEffect'
+import UseId from './components/hooks/UseId'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <UseDebugValue />
           <UseDeferredValue />
           <UseEffect />
+          <UseId/>
         </Grid>
       </Section>
     </main>
