@@ -375,11 +375,13 @@ const UseId = () => {
     /* @__PURE__ */ jsx(Tag, { title: "UseId" }),
     /* @__PURE__ */ jsx(Case, { title: "Case 1: add id to accessibility attribute", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
       /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "input" }),
-      /* @__PURE__ */ jsxs("label", { className: "flex flex-col items-start gap-2", children: [
-        "Password:",
+      /* @__PURE__ */ jsxs("label", { className: "flex flex-col items-start gap-2", htmlFor: "password", children: [
+        "password:",
         /* @__PURE__ */ jsx(
           "input",
           {
+            id: "password",
+            name: "password",
             className: "border rounded-sm p-1",
             placeholder: "enter the password",
             type: "password",
@@ -400,7 +402,7 @@ const UseImperativeHandle = () => {
   };
   return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
     /* @__PURE__ */ jsx(Tag, { title: "UseImperativeHandle" }),
-    /* @__PURE__ */ jsx(Case, { title: "Case 1: title", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: button to handle imperative behaviors of child element", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
       /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "button" }),
       /* @__PURE__ */ jsx("button", { onClick: handleClick, children: "scroll down the list & focus on input" }),
       /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600", children: "childs" }),

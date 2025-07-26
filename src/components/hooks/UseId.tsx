@@ -10,9 +10,11 @@ const UseId = () => {
             <Case title="Case 1: add id to accessibility attribute">
                 <div className="flex flex-col items-start gap-2">
                     <p className='text-sm text-gray-600'>input</p>
-                    <label className='flex flex-col items-start gap-2'>
-                        Password:
+                    <label className='flex flex-col items-start gap-2' htmlFor='password'>
+                        password:
                         <input
+                            id='password'
+                            name='password'
                             className='border rounded-sm p-1'
                             placeholder='enter the password'
                             type="password"

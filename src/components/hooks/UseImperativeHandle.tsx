@@ -12,7 +12,7 @@ const UseImperativeHandle = () => {
     return (
         <div className='flex flex-col gap-4 items-center sm:items-start'>
             <Tag title='UseImperativeHandle' />
-            <Case title="Case 1: title">
+            <Case title="Case 1: button to handle imperative behaviors of child element">
                 <div className='flex flex-col items-start gap-2'>
                     <p className="text-sm text-gray-600">button</p>
                     <button onClick={handleClick}>scroll down the list & focus on input</button>
