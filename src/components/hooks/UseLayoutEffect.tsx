@@ -28,6 +28,7 @@ const UseLayoutEffect = () => {
                             onPointerLeave={() => {
                                 setTargetRect(null);
                             }}
+                            className=' select-none'
                         >hover to see tooltip</button>
                         {targetRect !== null && (
                             <Tooltip targetRect={targetRect} />
@@ -72,9 +73,9 @@ const Tooltip = ({ targetRect }: { targetRect: any }) => {
                 pointerEvents: 'none',
                 left: 0,
                 top: 0,
-                transform: `translate3d(${tooltipX}px, ${tooltipY}px, 0)`
-            }}
-            className=''>
+                transform: `translate3d(${tooltipX}px, ${tooltipY}px, 0)`,
+
+            }}>
             <div
                 ref={toolTipRef}
                 className='tooltip bg-gray-300 text-black px-2 py-1 rounded-sm'

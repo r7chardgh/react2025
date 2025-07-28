@@ -504,6 +504,7 @@ const UseLayoutEffect = () => {
             onPointerLeave: () => {
               setTargetRect(null);
             },
+            className: " select-none",
             children: "hover to see tooltip"
           }
         ),
@@ -542,7 +543,6 @@ const Tooltip = ({ targetRect }) => {
           top: 0,
           transform: `translate3d(${tooltipX}px, ${tooltipY}px, 0)`
         },
-        className: "",
         children: /* @__PURE__ */ jsx(
           "div",
           {
