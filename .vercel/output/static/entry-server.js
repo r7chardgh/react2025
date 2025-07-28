@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, useRef, useImperativeHandle, useInsertionEffect, StrictMode } from "react";
+import { useActionState, memo, useState, useCallback, createContext, useContext, useDebugValue, useDeferredValue, Suspense, use, useEffect, useId, useRef, useImperativeHandle, useInsertionEffect, useLayoutEffect, StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { Routes, Route, Link, StaticRouter } from "react-router-dom";
 import { TbFishHook } from "react-icons/tb";
@@ -7,6 +7,7 @@ import { FaPlus, FaCartPlus, FaHome, FaCoffee } from "react-icons/fa";
 import { RiResetLeftFill } from "react-icons/ri";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { BiCool } from "react-icons/bi";
+import { createPortal } from "react-dom";
 const Grid = ({ children, className }) => {
   return /* @__PURE__ */ jsx("div", { className: className + " grid grid-cols-1 md:grid-cols-3", children });
 };
@@ -479,10 +480,86 @@ const UseInsertionEffect = () => {
     ] }) })
   ] });
 };
+const UseLayoutEffect = () => {
+  const buttonRef = useRef(null);
+  const [targetRect, setTargetRect] = useState(null);
+  return /* @__PURE__ */ jsxs("div", { className: "flex flex-col gap-4 items-center sm:items-start", children: [
+    /* @__PURE__ */ jsx(Tag, { title: "UseLayoutEffect" }),
+    /* @__PURE__ */ jsx(Case, { title: "Case 1: measure tooltip height before repaint to get correct position", children: /* @__PURE__ */ jsxs("div", { className: "flex flex-col items-start gap-2", children: [
+      /* @__PURE__ */ jsx("p", { className: " text-sm text-gray-600 mb-9", children: "result" }),
+      /* @__PURE__ */ jsxs("div", { children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            ref: buttonRef,
+            onPointerEnter: () => {
+              const rect = buttonRef.current.getBoundingClientRect();
+              setTargetRect({
+                left: rect.left,
+                top: rect.top,
+                right: rect.right,
+                bottom: rect.bottom
+              });
+            },
+            onPointerLeave: () => {
+              setTargetRect(null);
+            },
+            children: "hover to see tooltip"
+          }
+        ),
+        targetRect !== null && /* @__PURE__ */ jsx(Tooltip, { targetRect })
+      ] })
+    ] }) })
+  ] });
+};
+const Tooltip = ({ targetRect }) => {
+  const toolTipRef = useRef(null);
+  const [tooltipHeight, setTooltipHeight] = useState(0);
+  useLayoutEffect(() => {
+    if (!!toolTipRef.current) {
+      const { height } = toolTipRef.current.getBoundingClientRect();
+      setTooltipHeight(height);
+      console.log("Measured tooltip height: " + height);
+    }
+  }, []);
+  let tooltipX = 0;
+  let tooltipY = 0;
+  if (targetRect !== null) {
+    tooltipX = targetRect.left;
+    tooltipY = targetRect.top - tooltipHeight - 8;
+    if (tooltipY < 0) {
+      tooltipY = targetRect.bottom + 8;
+    }
+  }
+  return createPortal(
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        style: {
+          position: "fixed",
+          pointerEvents: "none",
+          left: 0,
+          top: 0,
+          transform: `translate3d(${tooltipX}px, ${tooltipY}px, 0)`
+        },
+        className: "",
+        children: /* @__PURE__ */ jsx(
+          "div",
+          {
+            ref: toolTipRef,
+            className: "tooltip bg-gray-300 text-black px-2 py-1 rounded-sm",
+            children: "this is tooltip"
+          }
+        )
+      }
+    ),
+    document.body
+  );
+};
 function App() {
   return /* @__PURE__ */ jsxs("main", { className: "relative w-full flex flex-col gap-9 mb-9 pt-24", children: [
     /* @__PURE__ */ jsx("h1", { children: "React 2025 (v19.1.0) WIP" }),
-    /* @__PURE__ */ jsx("p", { children: "last updated: Fri JUL 26 2025 00:58:50 GMT+0800" }),
+    /* @__PURE__ */ jsx("p", { children: "last updated: Fri JUL 28 2025 00:58:50 GMT+0800" }),
     /* @__PURE__ */ jsx(Section, { title: "HOOKS", children: /* @__PURE__ */ jsxs(Grid, { className: "gap-18 sm:gap-6 w-full", children: [
       /* @__PURE__ */ jsx(UseActionState, {}),
       /* @__PURE__ */ jsx(UseCallback, {}),
@@ -492,7 +569,8 @@ function App() {
       /* @__PURE__ */ jsx(UseEffect, {}),
       /* @__PURE__ */ jsx(UseId, {}),
       /* @__PURE__ */ jsx(UseImperativeHandle, {}),
-      /* @__PURE__ */ jsx(UseInsertionEffect, {})
+      /* @__PURE__ */ jsx(UseInsertionEffect, {}),
+      /* @__PURE__ */ jsx(UseLayoutEffect, {})
     ] }) })
   ] });
 }

@@ -121,3 +121,11 @@ useInsertionEffect(() => {
         };
     });
 ```
+
+10. useLayoutEffect
+
+usage: another version of useEffect, but it runs before browser repaints (be careful of performance issue)
+
+```
+useLayoutEffect(()=>{},[])
+```
